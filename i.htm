@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+    <link rel="stylesheet" href="styles.css">
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.filter-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.filter-section button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    background-color: #008CBA;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filter-section button:hover {
+    background-color: #005f73;
+}
+
+.product-display {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.product {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.product h3 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.product p {
+    margin: 10px 0;
+}
+
+.product span {
+    font-weight: bold;
+    color: #339;
+}
+
+
+</style>
+    
+</head>
+<body>
+   <br>
+   <br>
+    <div class="container">
+
+        <h1 margin='20'>Product List</h1>
+        
+        <!-- Filter Section -->
+        <div class="filter-section">
+            <button onclick="filterProducts('All')">All</button>
+            <button onclick="filterProducts('Electronics')">Electronics</button>
+            <button onclick="filterProducts('Clothing')">Clothing</button>
+        </div>
+
+        <!-- Product Display Area -->
+        <div class="product-display" id="productDisplay"></div>
+    </div>
+
+    <script src="script.js">
+    
+    
+    // Define the product data
+const products = [
+    { name: "Laptop", category: "Electronics", price: 1500 },
+    { name: "Smartphone", category: "Electronics", price: 800 },
+    { name: "T-shirt", category: "Clothing", price: 25 },
+    { name: "Jeans", category: "Clothing", price: 50 },
+    { name: "Tablet", category: "Electronics", price: 400 },
+    { name: "Jacket", category: "Clothing", price: 100 }
+];
+
+// Function to dynamically create product list
+function displayProducts(productArray) {
+    const productDisplay = document.getElementById("productDisplay");
+    productDisplay.innerHTML = '';  // Clear previous products
+
+    productArray.forEach(product => {
+        const productElement = document.createElement('div');
+        productElement.classList.add('product');
+
+        productElement.innerHTML = `
+            <h3>${product.name}</h3>
+            <p>Category: ${product.category}</p>
+            <span>$${product.price}</span>
+        `;
+
+        productDisplay.appendChild(productElement);
+    });
+}
+
+// Filter products by category
+function filterProducts(category) {
+    if (category === 'All') {
+        displayProducts(products);
+    } else {
+        const filteredProducts = products.filter(product => product.category === category);
+        displayProducts(filteredProducts);
+    }
+}
+
+// Initially display all products
+displayProducts(products);
+
+</script>
+</body>
+</html>
